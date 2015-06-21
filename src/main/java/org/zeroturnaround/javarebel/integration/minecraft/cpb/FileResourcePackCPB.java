@@ -43,5 +43,15 @@ public class FileResourcePackCPB extends JavassistClassBytecodeProcessor {
         "  }" +
         "}");
 
+    CtMethod hasResourceName = ctClass.getDeclaredMethod("hasResourceName");
+    hasResourceName.insertBefore("" +
+        "Integration i = IntegrationFactory.getInstance();" +
+        "if (i.isResourceReplaced(getClass().getClassLoader(), $1)) {" +
+        "  java.net.URL url = i.findRebelResource(getClass().getClassLoader(), $1);" +
+        "  if (url != null) {" +
+        "    return true;" +
+        "  }" +
+        "}");
+
   }
 }
