@@ -8,8 +8,7 @@ Tested with Minecraft 1.8 & Forge 11.14.3.1450
 ###Features:
 * fixes bug with using JRebel Legacy core
 * loads mod's resources from the project workspace
-* reload textures during runtime
-* detect new referenced resources during runtime
+* reload textures & json during runtime
 
 
 To use the plugin
