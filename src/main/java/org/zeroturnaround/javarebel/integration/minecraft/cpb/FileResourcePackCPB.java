@@ -7,6 +7,9 @@ import org.zeroturnaround.bundled.javassist.CtMethod;
 import org.zeroturnaround.javarebel.integration.minecraft.JrTextureMap;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
+/*
+  patches net.minecraft.client.resources.FileResourcePack
+ */
 public class FileResourcePackCPB extends JavassistClassBytecodeProcessor {
   @Override
   public void process(ClassPool cp, ClassLoader cl, CtClass ctClass) throws Exception {

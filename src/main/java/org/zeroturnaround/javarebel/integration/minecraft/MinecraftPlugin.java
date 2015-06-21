@@ -15,10 +15,14 @@ public class MinecraftPlugin implements Plugin {
 
     Integration i = IntegrationFactory.getInstance();
     ClassLoader cl = MinecraftPlugin.class.getClassLoader();
-    i.addIntegrationProcessor(cl, "net.minecraft.launchwrapper.LaunchClassLoader", new LauncherClassLoaderCBP());
-    i.addIntegrationProcessor(cl, "net.minecraft.client.resources.SimpleReloadableResourceManager", new SimpleReloadableResourceManagerCBP());
-    i.addIntegrationProcessor(cl,"net.minecraft.client.resources.FileResourcePack", new FileResourcePackCPB());
-    i.addIntegrationProcessor(cl,"net.minecraft.client.renderer.texture.TextureMap", new TextureMapCPB());
+    i.addIntegrationProcessor(cl, "net.minecraft.launchwrapper.LaunchClassLoader",
+        new LauncherClassLoaderCBP());
+    i.addIntegrationProcessor(cl, "net.minecraft.client.resources.SimpleReloadableResourceManager",
+        new SimpleReloadableResourceManagerCBP());
+    i.addIntegrationProcessor(cl,"net.minecraft.client.resources.FileResourcePack",
+        new FileResourcePackCPB());
+    i.addIntegrationProcessor(cl,"net.minecraft.client.renderer.texture.TextureMap",
+        new TextureMapCPB());
   }
 
   public boolean checkDependencies(ClassLoader classLoader, ClassResourceSource classResourceSource) {
@@ -50,6 +54,6 @@ public class MinecraftPlugin implements Plugin {
   }
 
   public String getTestedVersions() {
-    return null;
+    return "1.8-11.14.3.1450";
   }
 }

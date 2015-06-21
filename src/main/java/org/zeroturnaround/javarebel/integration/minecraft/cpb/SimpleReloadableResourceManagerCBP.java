@@ -6,6 +6,9 @@ import org.zeroturnaround.bundled.javassist.CtNewMethod;
 import org.zeroturnaround.javarebel.integration.minecraft.JrSimpleReloadableResourceManager;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
+/*
+  patches net.minecraft.client.resources.SimpleReloadableResourceManager
+ */
 public class SimpleReloadableResourceManagerCBP extends JavassistClassBytecodeProcessor {
   @Override
   public void process(ClassPool cp, ClassLoader cl, CtClass ctClass) throws Exception {

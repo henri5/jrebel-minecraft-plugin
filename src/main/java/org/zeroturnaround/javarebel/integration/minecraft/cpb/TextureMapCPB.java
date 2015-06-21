@@ -4,6 +4,9 @@ import org.zeroturnaround.bundled.javassist.*;
 import org.zeroturnaround.javarebel.integration.minecraft.JrTextureMap;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
+/*
+  patches net.minecraft.client.renderer.texture.TextureMap
+ */
 public class TextureMapCPB extends JavassistClassBytecodeProcessor {
   private static int RELOAD_TRESHOLD = 5000;
 
