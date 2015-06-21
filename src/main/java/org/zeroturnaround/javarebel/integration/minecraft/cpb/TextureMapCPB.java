@@ -1,6 +1,7 @@
 package org.zeroturnaround.javarebel.integration.minecraft.cpb;
 
 import org.zeroturnaround.bundled.javassist.*;
+import org.zeroturnaround.javarebel.integration.minecraft.JrSimpleReloadableResourceManager;
 import org.zeroturnaround.javarebel.integration.minecraft.JrTextureMap;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
@@ -48,9 +49,10 @@ public class TextureMapCPB extends JavassistClassBytecodeProcessor {
         "    it = reload.iterator();" +
         "    while (it.hasNext()) {" +
         "      IResourcePack iResourcePack = (IResourcePack) it.next();" +
+        // can probably replace with Minecraft.getMinecraft().scheduleResourcesRefresh()
         "      srrm.reloadResourcePack(iResourcePack);" +
         "    }" +
-        "    ((JrSimpleReloadableResourceManager) srrm)._jrNotifyListeners();" +
+        "    ((" + JrSimpleReloadableResourceManager.class.getName() + ") srrm)._jrNotifyReloadListeners();" +
         "  }" +
         "}", ctClass));
 
