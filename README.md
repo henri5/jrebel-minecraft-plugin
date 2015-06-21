@@ -1,4 +1,3 @@
-## jr-minecraft-plugin
 #JRebel Minecraft Plugin
 
 
