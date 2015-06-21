@@ -22,7 +22,7 @@ runClient {
 ```
 
 When setting up `rebel.xml`, make sure that first element of classpath points to directory that contains the `assets` folder, where you update the textures.
-Start up Minecraft, get into a world, change texture and save it - it automatically detects that a resource was changed and will invoke reload for the resourcepackage (takes couple of seconds)
+Start up Minecraft, get into a world, change texture or json and save it - it automatically detects that a resource was changed and will invoke reload for the resourcepackage (takes couple of seconds)
 
 If having any issues with this plugin, don't contact JRebel nor Minecraft support - fix it yourself.
 
