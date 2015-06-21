@@ -27,3 +27,5 @@ Start up Minecraft, get into a world, change texture or json and save it - it au
 If having any issues with this plugin, don't contact JRebel nor Minecraft support - fix it yourself.
 
 Tested with Minecraft 1.8 & Forge 11.14.3.1450
+
+Some reload handlers in MC take bit unnecessary amount of time, so you can skip them with `rebel.minecraft.ignore_reload_handlers` JVM argument. E.g `SoundHandler` takes nearly 40% of reload time, now you can skip it as `-Drebel.minecraft.ignore_reload_handlers=net.minecraft.client.audio.SoundHandler`, and you can add multiple classes there, separated by a comma as `-Drebel.minecraft.ignore_reload_handlers=foo.Bar,foo.Baz`.
