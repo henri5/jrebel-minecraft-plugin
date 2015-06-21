@@ -1,8 +1,6 @@
 package org.zeroturnaround.javarebel.integration.minecraft;
 
-/**
- * Created by Henri on 21.06.2015.
- */
 public interface JrSimpleReloadableResourceManager {
+  @SuppressWarnings("unused")
   void _jrNotifyReloadListeners();
 }

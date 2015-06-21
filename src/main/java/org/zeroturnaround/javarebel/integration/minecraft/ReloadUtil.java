@@ -17,6 +17,8 @@ public class ReloadUtil {
       }
     }
   }
+
+  @SuppressWarnings("unused")
   public static List getIgnoreReloadHandlers() {
     return ignoreReloadHandlers;
   }

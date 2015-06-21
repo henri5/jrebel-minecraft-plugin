@@ -7,8 +7,6 @@ import org.zeroturnaround.javarebel.integration.minecraft.JrSimpleReloadableReso
 import org.zeroturnaround.javarebel.integration.minecraft.ReloadUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
-import java.util.List;
-
 /*
   patches net.minecraft.client.resources.SimpleReloadableResourceManager
  */
