@@ -5,7 +5,7 @@
 * fixes bug with using JRebel Legacy core
 * loads mod's resources from the project workspace
 * reload textures during runtime
-* detect new resources during runtime
+* detect new referenced resources during runtime
 
 
 To use the plugin
