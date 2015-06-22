@@ -4,7 +4,7 @@ import org.zeroturnaround.bundled.javassist.ClassPool;
 import org.zeroturnaround.bundled.javassist.CtClass;
 import org.zeroturnaround.bundled.javassist.CtField;
 import org.zeroturnaround.bundled.javassist.CtMethod;
-import org.zeroturnaround.javarebel.integration.minecraft.JrTextureMap;
+import org.zeroturnaround.javarebel.integration.minecraft.JrMinecraft;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -35,8 +35,8 @@ public class FileResourcePackCPB extends JavassistClassBytecodeProcessor {
         "    if (!_jrMonitoredResources.contains($1)) {" +
         "      _jrMonitoredResources.add($1);" +
 //        "      System.out.println($0);" +
-        "      " + JrTextureMap.class.getName() + " jrTextureMap = (" + JrTextureMap.class.getName() + ") Minecraft.getMinecraft().getTextureMapBlocks();" +
-        "      jrTextureMap._jrMonitorResource(new MonitoredResource(ResourceUtil.asResource(url)), $0);" +
+        "      " + JrMinecraft.class.getName() + " jrMinecraft = (" + JrMinecraft.class.getName() + ") Minecraft.getMinecraft();" +
+        "      jrMinecraft._jrMonitorResource(new MonitoredResource(ResourceUtil.asResource(url)), $0);" +
         "      _jrLog.infoEcho(\"Monitoring resource '\" + url.getPath() +\"'\");" +
         "    }" +
         "    return url.openStream();" +

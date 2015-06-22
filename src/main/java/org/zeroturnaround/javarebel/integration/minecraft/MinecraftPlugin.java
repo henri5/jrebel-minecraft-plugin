@@ -7,7 +7,7 @@ import org.zeroturnaround.javarebel.Plugin;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.FileResourcePackCPB;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.LauncherClassLoaderCBP;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.SimpleReloadableResourceManagerCBP;
-import org.zeroturnaround.javarebel.integration.minecraft.cpb.TextureMapCPB;
+import org.zeroturnaround.javarebel.integration.minecraft.cpb.MinecraftCPB;
 
 public class MinecraftPlugin implements Plugin {
 
@@ -21,8 +21,8 @@ public class MinecraftPlugin implements Plugin {
         new SimpleReloadableResourceManagerCBP());
     i.addIntegrationProcessor(cl,"net.minecraft.client.resources.FileResourcePack",
         new FileResourcePackCPB());
-    i.addIntegrationProcessor(cl,"net.minecraft.client.renderer.texture.TextureMap",
-        new TextureMapCPB());
+    i.addIntegrationProcessor(cl,"net.minecraft.client.Minecraft",
+        new MinecraftCPB());
   }
 
   public boolean checkDependencies(ClassLoader classLoader, ClassResourceSource classResourceSource) {

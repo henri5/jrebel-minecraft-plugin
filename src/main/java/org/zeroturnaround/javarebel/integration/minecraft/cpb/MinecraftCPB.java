@@ -2,13 +2,13 @@ package org.zeroturnaround.javarebel.integration.minecraft.cpb;
 
 import org.zeroturnaround.bundled.javassist.*;
 import org.zeroturnaround.javarebel.integration.minecraft.JrSimpleReloadableResourceManager;
-import org.zeroturnaround.javarebel.integration.minecraft.JrTextureMap;
+import org.zeroturnaround.javarebel.integration.minecraft.JrMinecraft;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
-  patches net.minecraft.client.renderer.texture.TextureMap
+  patches net.minecraft.client.Minecraft
  */
-public class TextureMapCPB extends JavassistClassBytecodeProcessor {
+public class MinecraftCPB extends JavassistClassBytecodeProcessor {
   private static int RELOAD_TRESHOLD = 5000;
 
   @Override
@@ -25,7 +25,7 @@ public class TextureMapCPB extends JavassistClassBytecodeProcessor {
     ctClass.addField(CtField.make("private long _jrLastCheck = 0L;", ctClass));
     ctClass.addField(CtField.make("private static Logger _jrLog = LoggerFactory.getLogger(\"Minecraft\");", ctClass));
 
-    ctClass.addInterface(cp.get(JrTextureMap.class.getName()));
+    ctClass.addInterface(cp.get(JrMinecraft.class.getName()));
 
     ctClass.addMethod(CtNewMethod.make("" +
         "public void _jrMonitorResource(MonitoredResource mr, Object iResourcePack) {" +
@@ -45,7 +45,7 @@ public class TextureMapCPB extends JavassistClassBytecodeProcessor {
         "  }" +
         "  if (!reload.isEmpty()) {" +
 //        "    System.out.println(\"Reloading resources from \" + reload);" +
-        "    SimpleReloadableResourceManager srrm = (SimpleReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();" +
+        "    SimpleReloadableResourceManager srrm = (SimpleReloadableResourceManager) getResourceManager();" +
         "    it = reload.iterator();" +
         "    while (it.hasNext()) {" +
         "      IResourcePack iResourcePack = (IResourcePack) it.next();" +
@@ -56,7 +56,7 @@ public class TextureMapCPB extends JavassistClassBytecodeProcessor {
         "  }" +
         "}", ctClass));
 
-    CtMethod tick = ctClass.getDeclaredMethod("tick");
+    CtMethod tick = ctClass.getDeclaredMethod("runTick");
     tick.insertBefore("" +
         "if (_jrLastCheck + " + RELOAD_TRESHOLD + " < System.currentTimeMillis()) {" +
         "  _jrCheckAndReloadResources();" +

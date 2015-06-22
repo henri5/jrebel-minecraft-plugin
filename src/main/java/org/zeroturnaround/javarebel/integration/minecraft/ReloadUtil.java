@@ -6,20 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReloadUtil {
-  private static final List<String> ignoreReloadHandlers;
+  private static final List<String> skippedReloadHandlers;
   static {
-    ignoreReloadHandlers = new ArrayList<String>();
-    String ignoreClassesParameter = ConfigurationFactory.getInstance().getProperty("rebel.minecraft.ignore_reload_handlers");
-    if (ignoreClassesParameter != null) {
-      String[] ignoreClassesArray = ignoreClassesParameter.split(",");
-      for (String klass : ignoreClassesArray) {
-        ignoreReloadHandlers.add(klass);
+    skippedReloadHandlers = new ArrayList<String>();
+    String skipClassesParameter = ConfigurationFactory.getInstance().getProperty("rebel.minecraft.skip_reload_handlers");
+    if (skipClassesParameter != null) {
+      String[] skipClassesArray = skipClassesParameter.split(",");
+      for (String klass : skipClassesArray) {
+        skippedReloadHandlers.add(klass);
       }
     }
   }
 
   @SuppressWarnings("unused")
-  public static List getIgnoreReloadHandlers() {
-    return ignoreReloadHandlers;
+  public static boolean runReloadHandler(Class klass) {
+    if (skippedReloadHandlers.contains(klass.getName())) {
+      return false;
+    }
+    return true;
   }
 }

@@ -16,16 +16,19 @@ public class SimpleReloadableResourceManagerCBP extends JavassistClassBytecodePr
     cp.importPackage("org.zeroturnaround.javarebel");
     cp.importPackage("org.zeroturnaround.javarebel.integration.util");
 
+    ctClass.addField(CtField.make("private static Logger _jrLog = LoggerFactory.getLogger(\"Minecraft\");", ctClass));
+
     ctClass.addInterface(cp.get(JrSimpleReloadableResourceManager.class.getName()));
 
     ctClass.addMethod(CtNewMethod.make("" +
         "public void _jrNotifyReloadListeners() {" +
         "  notifyReloadListeners();" +
         "}", ctClass));
-    CtMethod registerReloadListener = ctClass.getDeclaredMethod("registerReloadListener");
-    registerReloadListener.insertBefore("" +
-        "System.out.println($1);" +
-        "new Throwable().printStackTrace();");
+
+//    CtMethod registerReloadListener = ctClass.getDeclaredMethod("registerReloadListener");
+//    registerReloadListener.insertBefore("" +
+//        "System.out.println($1);" +
+//        "new Throwable().printStackTrace();");
 
     CtMethod notifyReloadListeners = ctClass.getDeclaredMethod("notifyReloadListeners");
     notifyReloadListeners.instrument(new ExprEditor(){
@@ -33,12 +36,12 @@ public class SimpleReloadableResourceManagerCBP extends JavassistClassBytecodePr
       public void edit(MethodCall m) throws CannotCompileException {
         if ("onResourceManagerReload".equals(m.getMethodName())) {
           m.replace("{" +
-              "if (" + ReloadUtil.class.getName() + ".getIgnoreReloadHandlers().contains(iresourcemanagerreloadlistener.getClass().getName())) {" +
-              "  System.out.println(\"Skipping \" + iresourcemanagerreloadlistener);" +
-              "} else {" +
+              "if (" + ReloadUtil.class.getName() + ".runReloadHandler(iresourcemanagerreloadlistener.getClass())) {" +
               "  long startTime = System.currentTimeMillis();" +
               "  $proceed($$);" +
-              "  System.out.println(\"Method invocation took \" + (System.currentTimeMillis() - startTime) + \" for \" + iresourcemanagerreloadlistener);" +
+              "  _jrLog.infoEcho(\"Method invocation took \" + (System.currentTimeMillis() - startTime) + \" for \" + iresourcemanagerreloadlistener);" +
+              "} else {" +
+              "  _jrLog.infoEcho(\"Skipping \" + iresourcemanagerreloadlistener);" +
               "  }" +
               "}");
         }
