@@ -55,8 +55,8 @@ public class MinecraftCPB extends JavassistClassBytecodeProcessor {
         "  }" +
         "}", ctClass));
 
-    CtMethod tick = ctClass.getDeclaredMethod("runTick");
-    tick.insertBefore("" +
+    CtMethod runTick = ctClass.getDeclaredMethod("runTick");
+    runTick.insertBefore("" +
         "if (_jrLastCheck + " + RELOAD_TRESHOLD + " < System.currentTimeMillis()) {" +
         "  _jrCheckAndReloadResources();" +
         "  _jrLastCheck = System.currentTimeMillis();" +
