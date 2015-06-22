@@ -1,8 +1,5 @@
 #JRebel Minecraft Plugin
 
-
-**If having any issues with this plugin, don't contact JRebel nor Minecraft support - fix it yourself.**
-
 Tested with Minecraft 1.8 & Forge 11.14.3.1450
 
 ###Features:
@@ -27,4 +24,6 @@ runClient {
 When setting up `rebel.xml`, make sure that first element of classpath points to directory that contains the `assets` folder, where you update the textures.
 Start up Minecraft, get into a world, change texture or json and save it - it automatically detects that a resource was changed and will invoke reload for the resourcepackage (takes couple of seconds)
 
-Some reload handlers in MC take bit unnecessary amount of time, so you can skip them with `rebel.minecraft.skip_reload_handlers` JVM argument. E.g `SoundHandler` takes nearly 40% of reload time, now you can skip it as `-Drebel.minecraft.skip_reload_handlers=net.minecraft.client.audio.SoundHandler`, and you can add multiple classes there, separated by a comma as `-Drebel.minecraft.skip_reload_handlers=foo.Bar,foo.Baz`.
+#####Tweaks
+
+* `-Drebel.minecraft.skip_reload_handlers` - accepts comma-separated names of classes (e.g. `com.Foo,com.Bar`). When resource reloading occurs, handlers of these classes are not notified to speed up the reload process. Can cut the reload time nearly in half by skipping `SoundHandler` as `-Drebel.minecraft.skip_reload_handlers=net.minecraft.client.audio.SoundHandler`.
