@@ -1,8 +1,8 @@
 package org.zeroturnaround.javarebel.integration.minecraft.cpb;
 
 import org.zeroturnaround.bundled.javassist.*;
-import org.zeroturnaround.javarebel.integration.minecraft.JrSimpleReloadableResourceManager;
 import org.zeroturnaround.javarebel.integration.minecraft.JrMinecraft;
+import org.zeroturnaround.javarebel.integration.minecraft.JrSimpleReloadableResourceManager;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -44,7 +44,6 @@ public class MinecraftCPB extends JavassistClassBytecodeProcessor {
         "    }" +
         "  }" +
         "  if (!reload.isEmpty()) {" +
-//        "    System.out.println(\"Reloading resources from \" + reload);" +
         "    SimpleReloadableResourceManager srrm = (SimpleReloadableResourceManager) getResourceManager();" +
         "    it = reload.iterator();" +
         "    while (it.hasNext()) {" +

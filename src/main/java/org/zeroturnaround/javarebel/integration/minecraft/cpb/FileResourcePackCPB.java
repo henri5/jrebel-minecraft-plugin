@@ -30,11 +30,8 @@ public class FileResourcePackCPB extends JavassistClassBytecodeProcessor {
         "if (i.isResourceReplaced(getClass().getClassLoader(), $1)) {" +
         "  java.net.URL url = i.findRebelResource(getClass().getClassLoader(), $1);" +
         "  if (url != null) {" +
-//        "    System.out.println(url.getPath());" +
-//        "    new Throwable().printStackTrace();" +
         "    if (!_jrMonitoredResources.contains($1)) {" +
         "      _jrMonitoredResources.add($1);" +
-//        "      System.out.println($0);" +
         "      " + JrMinecraft.class.getName() + " jrMinecraft = (" + JrMinecraft.class.getName() + ") Minecraft.getMinecraft();" +
         "      jrMinecraft._jrMonitorResource(new MonitoredResource(ResourceUtil.asResource(url)), $0);" +
         "      _jrLog.infoEcho(\"Monitoring resource '\" + url.getPath() +\"'\");" +

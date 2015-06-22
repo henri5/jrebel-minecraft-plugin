@@ -25,11 +25,6 @@ public class SimpleReloadableResourceManagerCBP extends JavassistClassBytecodePr
         "  notifyReloadListeners();" +
         "}", ctClass));
 
-//    CtMethod registerReloadListener = ctClass.getDeclaredMethod("registerReloadListener");
-//    registerReloadListener.insertBefore("" +
-//        "System.out.println($1);" +
-//        "new Throwable().printStackTrace();");
-
     CtMethod notifyReloadListeners = ctClass.getDeclaredMethod("notifyReloadListeners");
     notifyReloadListeners.instrument(new ExprEditor(){
       @Override

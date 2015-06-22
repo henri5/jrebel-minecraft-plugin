@@ -6,8 +6,8 @@ import org.zeroturnaround.javarebel.IntegrationFactory;
 import org.zeroturnaround.javarebel.Plugin;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.FileResourcePackCPB;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.LauncherClassLoaderCBP;
-import org.zeroturnaround.javarebel.integration.minecraft.cpb.SimpleReloadableResourceManagerCBP;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.MinecraftCPB;
+import org.zeroturnaround.javarebel.integration.minecraft.cpb.SimpleReloadableResourceManagerCBP;
 
 public class MinecraftPlugin implements Plugin {
 
@@ -42,7 +42,7 @@ public class MinecraftPlugin implements Plugin {
   }
 
   public String getAuthor() {
-    return null;
+    return "Henri Viik";
   }
 
   public String getWebsite() {
