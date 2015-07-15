@@ -3,9 +3,9 @@
 Tested with Minecraft 1.8 & Forge 11.14.3.1450
 
 ###Features:
-* fixes bug with using JRebel Legacy core
-* loads mod's resources from the project workspace
-* reload textures & json during runtime
+* fixes bug with using JRebel Legacy core (`java.lang.NoClassDefFoundError: com/zeroturnaround/javarebel/gen/RebelLocator$$1`)
+* loads mod's resources from the project workspace as per [rebel.xml](http://manuals.zeroturnaround.com/jrebel/standalone/config.html)
+* automatically trigger reload of textures & json during runtime
 
 
 To use the plugin
