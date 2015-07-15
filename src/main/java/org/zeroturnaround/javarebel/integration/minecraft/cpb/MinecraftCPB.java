@@ -34,22 +34,22 @@ public class MinecraftCPB extends JavassistClassBytecodeProcessor {
 
     ctClass.addMethod(CtNewMethod.make("" +
         "public void _jrCheckAndReloadResources() {" +
-        "  java.util.List reload = new java.util.ArrayList();" +
+        "  java.util.List changedResourcePacks = new java.util.ArrayList();" +
         "  java.util.Iterator it = _jrResources.entrySet().iterator();" +
         "  while (it.hasNext()) {" +
         "    java.util.Map.Entry pair = (java.util.Map.Entry) it.next();" +
         "    MonitoredResource mr = (MonitoredResource) pair.getKey();" +
-        "    if (mr.modified() && !reload.contains(pair.getValue())) {" +
-        "      reload.add(pair.getValue());" +
+        "    if (mr.modified() && !changedResourcePacks.contains(pair.getValue())) {" +
+        "      changedResourcePacks.add(pair.getValue());" +
         "    }" +
         "  }" +
-        "  if (!reload.isEmpty()) {" +
+        "  if (!changedResourcePacks.isEmpty()) {" +
         "    SimpleReloadableResourceManager srrm = (SimpleReloadableResourceManager) getResourceManager();" +
-        "    it = reload.iterator();" +
+        "    it = changedResourcePacks.iterator();" +
         "    while (it.hasNext()) {" +
-        "      IResourcePack iResourcePack = (IResourcePack) it.next();" +
+        "      IResourcePack resourcePack = (IResourcePack) it.next();" +
         // can probably replace with Minecraft.getMinecraft().scheduleResourcesRefresh()
-        "      srrm.reloadResourcePack(iResourcePack);" +
+        "      srrm.reloadResourcePack(resourcePack);" +
         "    }" +
         "    ((" + JrSimpleReloadableResourceManager.class.getName() + ") srrm)._jrNotifyReloadListeners();" +
         "  }" +
