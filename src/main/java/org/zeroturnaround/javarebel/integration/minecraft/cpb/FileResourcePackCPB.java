@@ -13,6 +13,7 @@ import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodePr
 public class FileResourcePackCPB extends JavassistClassBytecodeProcessor {
   @Override
   public void process(ClassPool cp, ClassLoader cl, CtClass ctClass) throws Exception {
+    cp.importPackage("java.net");
     cp.importPackage("java.util");
     cp.importPackage("org.zeroturnaround.javarebel");
     cp.importPackage("org.zeroturnaround.javarebel.integration.monitor");
@@ -21,20 +22,20 @@ public class FileResourcePackCPB extends JavassistClassBytecodeProcessor {
     cp.importPackage("net.minecraft.client.renderer.texture");
     cp.importPackage("net.minecraft.client.resources");
 
-    ctClass.addField(CtField.make("public static List _jrMonitoredResources = new ArrayList();", ctClass));
+    ctClass.addField(CtField.make("private static List _jrMonitoredResources = new ArrayList();", ctClass));
     ctClass.addField(CtField.make("private static Logger _jrLog = LoggerFactory.getLogger(\"Minecraft\");", ctClass));
 
     CtMethod findClass = ctClass.getDeclaredMethod("getInputStreamByName");
     findClass.insertBefore("" +
         "Integration i = IntegrationFactory.getInstance();" +
         "if (i.isResourceReplaced(getClass().getClassLoader(), $1)) {" +
-        "  java.net.URL url = i.findRebelResource(getClass().getClassLoader(), $1);" +
+        "  URL url = i.findRebelResource(getClass().getClassLoader(), $1);" +
         "  if (url != null) {" +
         "    if (!_jrMonitoredResources.contains($1)) {" +
         "      _jrMonitoredResources.add($1);" +
         "      " + JrMinecraft.class.getName() + " jrMinecraft = (" + JrMinecraft.class.getName() + ") Minecraft.getMinecraft();" +
         "      jrMinecraft._jrMonitorResource(new MonitoredResource(ResourceUtil.asResource(url)), $0);" +
-        "      _jrLog.infoEcho(\"Monitoring resource '\" + url.getPath() +\"'\");" +
+        "      _jrLog.infoEcho(\"Monitoring resource '{}'\", new Object[]{url.getPath()});" +
         "    }" +
         "    return url.openStream();" +
         "  }" +

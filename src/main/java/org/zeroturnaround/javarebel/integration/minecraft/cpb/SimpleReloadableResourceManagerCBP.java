@@ -3,6 +3,8 @@ package org.zeroturnaround.javarebel.integration.minecraft.cpb;
 import org.zeroturnaround.bundled.javassist.*;
 import org.zeroturnaround.bundled.javassist.expr.ExprEditor;
 import org.zeroturnaround.bundled.javassist.expr.MethodCall;
+import org.zeroturnaround.javarebel.Logger;
+import org.zeroturnaround.javarebel.LoggerFactory;
 import org.zeroturnaround.javarebel.integration.minecraft.JrSimpleReloadableResourceManager;
 import org.zeroturnaround.javarebel.integration.minecraft.ReloadUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
@@ -34,13 +36,12 @@ public class SimpleReloadableResourceManagerCBP extends JavassistClassBytecodePr
               "if (" + ReloadUtil.class.getName() + ".runReloadHandler(iresourcemanagerreloadlistener.getClass())) {" +
               "  long startTime = System.currentTimeMillis();" +
               "  $proceed($$);" +
-              "  _jrLog.infoEcho(\"Method invocation took \" + (System.currentTimeMillis() - startTime) + \" for \" + iresourcemanagerreloadlistener);" +
+              "  _jrLog.infoEcho(\"Reload handler ran {} ms for {}\", new Object[]{new Long(System.currentTimeMillis() - startTime), iresourcemanagerreloadlistener});" +
               "} else {" +
-              "  _jrLog.infoEcho(\"Skipping \" + iresourcemanagerreloadlistener);" +
+              "  _jrLog.infoEcho(\"Skipping reload handler {}\", new Object[]{iresourcemanagerreloadlistener});" +
               "  }" +
               "}");
         }
-        super.edit(m);
       }
     });
   }

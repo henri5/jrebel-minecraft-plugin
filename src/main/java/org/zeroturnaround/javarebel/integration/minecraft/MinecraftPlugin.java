@@ -4,10 +4,7 @@ import org.zeroturnaround.javarebel.ClassResourceSource;
 import org.zeroturnaround.javarebel.Integration;
 import org.zeroturnaround.javarebel.IntegrationFactory;
 import org.zeroturnaround.javarebel.Plugin;
-import org.zeroturnaround.javarebel.integration.minecraft.cpb.FileResourcePackCPB;
-import org.zeroturnaround.javarebel.integration.minecraft.cpb.LauncherClassLoaderCBP;
-import org.zeroturnaround.javarebel.integration.minecraft.cpb.MinecraftCPB;
-import org.zeroturnaround.javarebel.integration.minecraft.cpb.SimpleReloadableResourceManagerCBP;
+import org.zeroturnaround.javarebel.integration.minecraft.cpb.*;
 
 public class MinecraftPlugin implements Plugin {
 

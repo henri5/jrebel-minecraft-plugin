@@ -21,9 +21,8 @@ public class MinecraftCPB extends JavassistClassBytecodeProcessor {
     cp.importPackage("net.minecraft.client");
     cp.importPackage("net.minecraft.client.resources");
 
-    ctClass.addField(CtField.make("private java.util.Map _jrResources = new HashMap();", ctClass));
+    ctClass.addField(CtField.make("private Map _jrResources = new HashMap();", ctClass));
     ctClass.addField(CtField.make("private long _jrLastCheck = 0L;", ctClass));
-    ctClass.addField(CtField.make("private static Logger _jrLog = LoggerFactory.getLogger(\"Minecraft\");", ctClass));
 
     ctClass.addInterface(cp.get(JrMinecraft.class.getName()));
 
@@ -34,8 +33,8 @@ public class MinecraftCPB extends JavassistClassBytecodeProcessor {
 
     ctClass.addMethod(CtNewMethod.make("" +
         "public void _jrCheckAndReloadResources() {" +
-        "  java.util.List changedResourcePacks = new java.util.ArrayList();" +
-        "  java.util.Iterator it = _jrResources.entrySet().iterator();" +
+        "  List changedResourcePacks = new ArrayList();" +
+        "  Iterator it = _jrResources.entrySet().iterator();" +
         "  while (it.hasNext()) {" +
         "    java.util.Map.Entry pair = (java.util.Map.Entry) it.next();" +
         "    MonitoredResource mr = (MonitoredResource) pair.getKey();" +

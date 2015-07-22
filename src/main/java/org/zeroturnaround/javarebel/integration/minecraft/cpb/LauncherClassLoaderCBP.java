@@ -5,6 +5,7 @@ import org.zeroturnaround.bundled.javassist.CtClass;
 import org.zeroturnaround.bundled.javassist.CtConstructor;
 import org.zeroturnaround.bundled.javassist.CtMethod;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
+
 /*
   patches net.minecraft.launchwrapper.LaunchClassLoader
  */
