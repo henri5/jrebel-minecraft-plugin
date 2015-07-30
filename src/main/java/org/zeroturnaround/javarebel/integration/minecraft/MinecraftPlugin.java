@@ -1,13 +1,11 @@
 package org.zeroturnaround.javarebel.integration.minecraft;
 
-import org.zeroturnaround.javarebel.ClassResourceSource;
-import org.zeroturnaround.javarebel.Integration;
-import org.zeroturnaround.javarebel.IntegrationFactory;
-import org.zeroturnaround.javarebel.Plugin;
+import org.zeroturnaround.javarebel.*;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.*;
+import org.zeroturnaround.javarebel.integration.minecraft.cpb.forge.GameDataCPB;
 
 public class MinecraftPlugin implements Plugin {
-
+  private static final boolean REROUTE_BLOCKS = ConfigurationFactory.getInstance().getBoolean("rebel.minecraft.reroute_blocks");
   public void preinit() {
 
     Integration i = IntegrationFactory.getInstance();
@@ -20,6 +18,16 @@ public class MinecraftPlugin implements Plugin {
         new FileResourcePackCPB());
     i.addIntegrationProcessor(cl,"net.minecraft.client.Minecraft",
         new MinecraftCPB());
+
+    //Proof-of-concept
+    if (REROUTE_BLOCKS) {
+      i.addIntegrationProcessor(cl,"net.minecraft.block.Block",
+          new BlockCPB());
+      i.addIntegrationProcessor(cl,"net.minecraftforge.fml.common.registry.GameData",
+          new GameDataCPB());
+      ReloaderFactory.getInstance().addClassReloadListener(new BlockClassEventListener());
+    }
+
   }
 
   public boolean checkDependencies(ClassLoader classLoader, ClassResourceSource classResourceSource) {

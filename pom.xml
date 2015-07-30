@@ -9,17 +9,20 @@
         
     <name>JRebel Minecraft Plugin</name>
 
+	<properties>
+		<jrebel.version>6.2.2</jrebel.version>
+	</properties>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>jr-sdk</artifactId>
-            <version>${project.version}</version>
+            <version>${jrebel.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>jr-utils</artifactId>
-            <version>${project.version}</version>
+            <version>${jrebel.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
