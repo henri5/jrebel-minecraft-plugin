@@ -12,15 +12,15 @@ To use the plugin
 
 1. get [JRebel](https://zeroturnaround.com/software/jrebel/)
 2. build the plugin as `mvn clean package`
-3. add JRebel and plugin to JVM arguments as `-javaagent:/path/to/jrebel.jar -Drebel.plugins=/path/to/jr-minecraft-plugin-x.y.z.jar`
+3. add JRebel and plugin to JVM arguments as `-javaagent:/path/to/jrebel.jar -Drebel.plugins=/path/to/jr-minecraft-plugin-6.2.2.jar`
 
 If using Forge, place the arguments inside `build.gradle` `runClient` conf as
 ```
 runClient {
-    jvmArgs '-javaagent:/path/to/jrebel.jar', '-Drebel.plugins=/path/tojr-minecraft-plugin-6.2.2.jar'
+    jvmArgs '-javaagent:/path/to/jrebel.jar', '-Drebel.plugins=/path/to/jr-minecraft-plugin-6.2.2.jar'
 }
 ```
-
+####NB!
 When setting up `rebel.xml`, make sure that first element of classpath points to directory that contains the `assets` folder, where you update the textures.
 Start up Minecraft, get into a world, change texture or json and save it - it automatically detects that a resource was changed and will invoke reload for the resourcepackage (takes couple of seconds)
 
