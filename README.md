@@ -17,16 +17,17 @@ To use the plugin
 If using Forge, place the arguments inside `build.gradle` `runClient` conf as
 ```
 runClient {
-    jvmArgs '-javaagent:/path/to/jrebel.jar', '-Drebel.plugins=/path/tojr-minecraft-plugin-x.y.z.jar'
+    jvmArgs '-javaagent:/path/to/jrebel.jar', '-Drebel.plugins=/path/tojr-minecraft-plugin-6.2.2.jar'
 }
 ```
 
 When setting up `rebel.xml`, make sure that first element of classpath points to directory that contains the `assets` folder, where you update the textures.
 Start up Minecraft, get into a world, change texture or json and save it - it automatically detects that a resource was changed and will invoke reload for the resourcepackage (takes couple of seconds)
 
-#####Tweaks
+#####Tips & Tweaks
 
-* `-Drebel.minecraft.skip_reload_handlers` - accepts comma-separated names of classes (e.g. `com.Foo,com.Bar`). When resource reloading occurs, handlers of these classes are not notified to speed up the reload process. Can cut the reload time nearly in half by skipping `SoundHandler` as `-Drebel.minecraft.skip_reload_handlers=net.minecraft.client.audio.SoundHandler`.
+* `-Drebel.minecraft.skip_reload_handlers` - accepts comma-separated names of classes (e.g. `com.Foo,com.Bar`). When resource reloading occurs, handlers of these classes are not notified to speed up the reload process. Can cut the reload time nearly in half by skipping `SoundHandler` as `-Drebel.minecraft.skip_reload_handlers=net.minecraft.client.audio.SoundHandler`. Add it to jvmArgs.
+* Press P while holding down F3 to disable game entering pause menu whenever it loses focus.
 
 ![](https://raw.githubusercontent.com/henri5/jr-minecraft-plugin/master/plugin_in_action.gif)
 
