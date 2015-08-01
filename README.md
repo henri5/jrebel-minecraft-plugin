@@ -6,6 +6,7 @@ Tested with Minecraft 1.8 & Forge 11.14.3.1450
 * fixes bug with using JRebel Legacy core (`java.lang.NoClassDefFoundError: com/zeroturnaround/javarebel/gen/RebelLocator$$1`)
 * loads mod's resources from the project workspace as per [rebel.xml](http://manuals.zeroturnaround.com/jrebel/standalone/config.html)
 * automatically triggers reload of textures & json during runtime
+* **Experimental** - with JVM argument `-Drebel.minecraft.reroute_blocks=true` and as long the block has no-parameter constructor with all block initialization inside (so no chaining setters), the plugin is able to reflect some changes during runtime (e.g. block hardness, in which tab the block is located in). This is done by redirecting some getter methods (there has to be better way?). As usual, you can override methods defined in Block class with JRebel and see the changes without any plugin-related magic.
 
 
 To use the plugin
