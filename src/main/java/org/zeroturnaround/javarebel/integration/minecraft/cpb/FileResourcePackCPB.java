@@ -4,7 +4,7 @@ import org.zeroturnaround.bundled.javassist.ClassPool;
 import org.zeroturnaround.bundled.javassist.CtClass;
 import org.zeroturnaround.bundled.javassist.CtField;
 import org.zeroturnaround.bundled.javassist.CtMethod;
-import org.zeroturnaround.javarebel.integration.minecraft.JrMinecraft;
+import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrMinecraft;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*

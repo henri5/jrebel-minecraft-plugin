@@ -1,8 +1,8 @@
 package org.zeroturnaround.javarebel.integration.minecraft.cpb;
 
 import org.zeroturnaround.bundled.javassist.*;
-import org.zeroturnaround.javarebel.integration.minecraft.JrMinecraft;
-import org.zeroturnaround.javarebel.integration.minecraft.JrSimpleReloadableResourceManager;
+import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrMinecraft;
+import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrSimpleReloadableResourceManager;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -14,15 +14,15 @@ public class MinecraftCPB extends JavassistClassBytecodeProcessor {
   @Override
   public void process(ClassPool cp, ClassLoader cl, CtClass ctClass) throws Exception {
     cp.importPackage("java.util");
-    cp.importPackage("org.zeroturnaround.javarebel");
-    cp.importPackage("org.zeroturnaround.javarebel.integration.minecraft");
-    cp.importPackage("org.zeroturnaround.javarebel.integration.monitor");
-    cp.importPackage("org.zeroturnaround.javarebel.integration.util");
     cp.importPackage("net.minecraft.client");
     cp.importPackage("net.minecraft.client.resources");
+    cp.importPackage("org.zeroturnaround.javarebel");
+    cp.importPackage("org.zeroturnaround.javarebel.integration.minecraft.interfaces");
+    cp.importPackage("org.zeroturnaround.javarebel.integration.monitor");
+    cp.importPackage("org.zeroturnaround.javarebel.integration.util");
 
-    ctClass.addField(CtField.make("private Map _jrResources = new HashMap();", ctClass));
     ctClass.addField(CtField.make("private long _jrLastCheck = 0L;", ctClass));
+    ctClass.addField(CtField.make("private Map _jrResources = new HashMap();", ctClass));
 
     ctClass.addInterface(cp.get(JrMinecraft.class.getName()));
 

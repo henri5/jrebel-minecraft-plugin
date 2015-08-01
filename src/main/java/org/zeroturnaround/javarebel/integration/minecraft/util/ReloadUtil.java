@@ -1,4 +1,4 @@
-package org.zeroturnaround.javarebel.integration.minecraft;
+package org.zeroturnaround.javarebel.integration.minecraft.util;
 
 import org.zeroturnaround.javarebel.ConfigurationFactory;
 

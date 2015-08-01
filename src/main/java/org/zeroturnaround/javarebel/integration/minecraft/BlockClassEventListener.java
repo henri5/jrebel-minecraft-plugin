@@ -1,15 +1,15 @@
 package org.zeroturnaround.javarebel.integration.minecraft;
 
 import org.zeroturnaround.javarebel.ClassEventListener;
+import org.zeroturnaround.javarebel.integration.minecraft.util.BlockUtil;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 public class BlockClassEventListener implements ClassEventListener {
   public BlockClassEventListener() {}
 
   public void onClassEvent(int eventType, Class<?> klass) {
-    if (BlockUtil.hasClass(klass)) {
+    if (BlockUtil.isReroutedBlockClass(klass)) {
       if (eventType == EVENT_RELOADED) {
         Constructor[] ctors = klass.getConstructors();
         Constructor ctor = null;
