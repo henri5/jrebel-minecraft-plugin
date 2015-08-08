@@ -25,8 +25,8 @@ public class FileResourcePackCPB extends JavassistClassBytecodeProcessor {
     ctClass.addField(CtField.make("private static List _jrMonitoredResources = new ArrayList();", ctClass));
     ctClass.addField(CtField.make("private static Logger _jrLog = LoggerFactory.getLogger(\"Minecraft\");", ctClass));
 
-    CtMethod findClass = ctClass.getDeclaredMethod("getInputStreamByName");
-    findClass.insertBefore("" +
+    CtMethod getInputStreamByName = ctClass.getDeclaredMethod("getInputStreamByName");
+    getInputStreamByName.insertBefore("" +
         "Integration i = IntegrationFactory.getInstance();" +
         "if (i.isResourceReplaced(getClass().getClassLoader(), $1)) {" +
         "  URL url = i.findRebelResource(getClass().getClassLoader(), $1);" +

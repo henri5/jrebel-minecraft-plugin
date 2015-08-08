@@ -3,6 +3,7 @@ package org.zeroturnaround.javarebel.integration.minecraft;
 import org.zeroturnaround.javarebel.*;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.*;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.forge.GameDataCPB;
+import org.zeroturnaround.javarebel.integration.minecraft.cpb.forge.ModelLoaderCPB;
 
 public class MinecraftPlugin implements Plugin {
   private static final boolean REROUTE_BLOCKS = ConfigurationFactory.getInstance().getBoolean("rebel.minecraft.reroute_blocks");
@@ -21,10 +22,18 @@ public class MinecraftPlugin implements Plugin {
 
     //Proof-of-concept
     if (REROUTE_BLOCKS) {
-      i.addIntegrationProcessor(cl,"net.minecraft.block.Block",
-          new BlockCPB());
       i.addIntegrationProcessor(cl,"net.minecraftforge.fml.common.registry.GameData",
           new GameDataCPB());
+      i.addIntegrationProcessor(cl,"net.minecraft.block.state.BlockState",
+          new BlockStateCPB());
+      i.addIntegrationProcessor(cl,"net.minecraft.block.Block",
+          new BlockCPB());
+      i.addIntegrationProcessor(cl,"net.minecraftforge.client.model.ModelLoader",
+          new ModelLoaderCPB());
+      i.addIntegrationProcessor(cl,"net.minecraft.util.RegistryNamespaced",
+          new RegistryNamespacedCPB());
+      i.addIntegrationProcessor(cl,"net.minecraft.world.WorldServer",
+          new WorldServerCPB());
       ReloaderFactory.getInstance().addClassReloadListener(new BlockClassEventListener());
     }
 
