@@ -3,6 +3,7 @@ package org.zeroturnaround.javarebel.integration.minecraft.cpb.forge;
 import org.zeroturnaround.bundled.javassist.*;
 import org.zeroturnaround.bundled.javassist.expr.ExprEditor;
 import org.zeroturnaround.bundled.javassist.expr.MethodCall;
+import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrBlock;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -18,7 +19,7 @@ public class ModelLoaderCPB extends JavassistClassBytecodeProcessor {
       public void edit(MethodCall m) throws CannotCompileException {
         if ("put".equals(m.getMethodName())) {
           m.replace(
-              "$_ = (net.minecraftforge.fml.common.registry.RegistryDelegate) $proceed(((JrBlock) block)._jrGetDelegate(), mapper);"
+              "$_ = (net.minecraftforge.fml.common.registry.RegistryDelegate) $proceed(((" + JrBlock.class.getName() +  ") block)._jrGetDelegate(), mapper);"
           );
         }
       }

@@ -4,6 +4,7 @@ import org.zeroturnaround.bundled.javassist.*;
 import org.zeroturnaround.bundled.javassist.expr.ExprEditor;
 import org.zeroturnaround.bundled.javassist.expr.MethodCall;
 import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrBlock;
+import org.zeroturnaround.javarebel.integration.minecraft.util.BlockUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -44,7 +45,7 @@ public class BlockCPB extends JavassistClassBytecodeProcessor {
         if ("getBlock".equals(m.getMethodName())) {
           m.replace(
                "$_ = $proceed($$);" +
-               "$_ = (Block) BlockUtil.getRealObjectFor($_);"
+               "$_ = (Block) " + BlockUtil.class.getName() + ".getRealObjectFor($_);"
           );
         }
       }
