@@ -1,7 +1,7 @@
 package org.zeroturnaround.javarebel.integration.minecraft;
 
 import org.zeroturnaround.javarebel.ClassEventListener;
-import org.zeroturnaround.javarebel.integration.minecraft.util.BlockUtil;
+import org.zeroturnaround.javarebel.integration.minecraft.util.ProxyUtil;
 
 import java.lang.reflect.Constructor;
 
@@ -9,7 +9,7 @@ public class BlockClassEventListener implements ClassEventListener {
   public BlockClassEventListener() {}
 
   public void onClassEvent(int eventType, Class<?> klass) {
-    if (BlockUtil.isProxyBlockClass(klass)) {
+    if (ProxyUtil.isProxiedClass(klass)) {
       if (eventType == EVENT_RELOADED) {
         Constructor[] ctors = klass.getConstructors();
         Constructor ctor = null;
@@ -22,7 +22,7 @@ public class BlockClassEventListener implements ClassEventListener {
 
         try {
           ctor.setAccessible(true);
-          BlockUtil.updateProxyBlock(ctor.newInstance());
+          ProxyUtil.updateProxy(ctor.newInstance());
         } catch (Exception e) {
           //guess we don't have anything to do
         }

@@ -11,50 +11,50 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockUtil {
-  private static Map<Class, ProxyObject> blockInstanceMap = new HashMap<Class, ProxyObject>();
+public class ProxyUtil {
+  private static Map<Class, ProxyObject> proxyInstanceMap = new HashMap<Class, ProxyObject>();
 
-  public static void updateProxyBlock(Object block) {
-    ProxyMethodHandler proxyHandler = getMethodHandlerForClass(block.getClass());
-    proxyHandler.setInstance(block);
+  public static void updateProxy(Object obj) {
+    ProxyMethodHandler proxyHandler = getMethodHandlerForClass(obj.getClass());
+    proxyHandler.setInstance(obj);
   }
 
-  public static boolean isProxyBlockClass(Class klass) {
-    return blockInstanceMap.get(klass) != null;
+  public static boolean isProxiedClass(Class klass) {
+    return proxyInstanceMap.get(klass) != null;
   }
 
   @SuppressWarnings("unused")
-  public static Object getOriginalBlock(Object block) {
-    if (isProxyBlockClass(block.getClass())) {
-      ProxyMethodHandler proxyHandler = getMethodHandlerForClass(block.getClass());
+  public static Object getOriginalObj(Object obj) {
+    if (isProxiedClass(obj.getClass())) {
+      ProxyMethodHandler proxyHandler = getMethodHandlerForClass(obj.getClass());
       return proxyHandler.getOriginalInstance();
     }
     return null;
   }
 
   private static ProxyMethodHandler getMethodHandlerForClass(Class klass) {
-    return (ProxyMethodHandler) blockInstanceMap.get(klass).getHandler();
+    return (ProxyMethodHandler) proxyInstanceMap.get(klass).getHandler();
   }
 
   @SuppressWarnings("unused")
-  public static Object getOrCreateProxyBlock(Object block) {
-    if (block.getClass().getCanonicalName().contains("net.minecraft")) {
-      return block;
+  public static Object getOrCreateProxyForObj(Object obj) {
+    if (obj.getClass().getCanonicalName().contains("net.minecraft")) {
+      return obj;
     }
 
-    if (block instanceof ProxyObject) {
-      return block;
+    if (obj instanceof ProxyObject) {
+      return obj;
     }
 
-    Object proxy =  blockInstanceMap.get(block.getClass());
+    Object proxy =  proxyInstanceMap.get(obj.getClass());
     if (proxy != null) {
       return proxy;
     }
 
     try {
-      ProxyMethodHandler handler = new ProxyMethodHandler(block);
+      ProxyMethodHandler handler = new ProxyMethodHandler(obj);
       ProxyFactory factory = new ProxyFactory();
-      factory.setSuperclass(block.getClass());
+      factory.setSuperclass(obj.getClass());
       factory.setFilter(new MethodFilter() {
         @Override
         public boolean isHandled(Method method) {
@@ -62,21 +62,21 @@ public class BlockUtil {
         }
       });
       Object result = factory.create(new Class<?>[0], new Object[0], handler);
-      blockInstanceMap.put(block.getClass(), (ProxyObject) result);
+      proxyInstanceMap.put(obj.getClass(), (ProxyObject) result);
       return result;
     } catch (Exception e) {
       e.printStackTrace();
       //aww dangit
     }
-    return block;
+    return obj;
   }
 
   @SuppressWarnings("unused")
-  public static Object getRealObjectFor(Object object) {
-    if (!(object instanceof ProxyObject)) {
-      return object;
+  public static Object getRealObjectFor(Object obj) {
+    if (!(obj instanceof ProxyObject)) {
+      return obj;
     }
-    return ((ProxyMethodHandler) ((ProxyObject) object).getHandler()).getInstance();
+    return ((ProxyMethodHandler) ((ProxyObject) obj).getHandler()).getInstance();
   }
 
   private static class ProxyMethodHandler implements MethodHandler {

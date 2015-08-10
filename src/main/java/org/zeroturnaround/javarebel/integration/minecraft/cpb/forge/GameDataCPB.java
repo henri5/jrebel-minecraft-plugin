@@ -4,7 +4,7 @@ import org.zeroturnaround.bundled.javassist.*;
 import org.zeroturnaround.bundled.javassist.expr.ExprEditor;
 import org.zeroturnaround.bundled.javassist.expr.FieldAccess;
 import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrBlock;
-import org.zeroturnaround.javarebel.integration.minecraft.util.BlockUtil;
+import org.zeroturnaround.javarebel.integration.minecraft.util.ProxyUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -19,7 +19,7 @@ public class GameDataCPB extends JavassistClassBytecodeProcessor {
 
     CtMethod registerBlock = ctClass.getDeclaredMethod("registerBlock", new CtClass[]{cp.get("net.minecraft.block.Block"), cp.get("java.lang.String"), CtPrimitiveType.intType});
     registerBlock.insertBefore("" +
-        "block = (Block) " + BlockUtil.class.getName() + ".getOrCreateProxyBlock(block);" +
+        "block = (Block) " + ProxyUtil.class.getName() + ".getOrCreateProxyForObj(block);" +
         "");
 
     registerBlock.instrument(new ExprEditor() {

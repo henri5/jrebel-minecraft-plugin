@@ -3,7 +3,7 @@ package org.zeroturnaround.javarebel.integration.minecraft.cpb;
 import org.zeroturnaround.bundled.javassist.ClassPool;
 import org.zeroturnaround.bundled.javassist.CtClass;
 import org.zeroturnaround.bundled.javassist.CtConstructor;
-import org.zeroturnaround.javarebel.integration.minecraft.util.BlockUtil;
+import org.zeroturnaround.javarebel.integration.minecraft.util.ProxyUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -22,7 +22,7 @@ public class BlockStateCPB extends JavassistClassBytecodeProcessor {
             cp.get("com.google.common.collect.ImmutableMap")
         });
     constructor.insertBefore("" +
-        "blockIn = (Block) " + BlockUtil.class.getName() + ".getOrCreateProxyBlock($1);" +
+        "blockIn = (Block) " + ProxyUtil.class.getName() + ".getOrCreateProxyForObj($1);" +
         "");
   }
 }

@@ -4,7 +4,7 @@ import org.zeroturnaround.bundled.javassist.*;
 import org.zeroturnaround.bundled.javassist.expr.ExprEditor;
 import org.zeroturnaround.bundled.javassist.expr.MethodCall;
 import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrBlock;
-import org.zeroturnaround.javarebel.integration.minecraft.util.BlockUtil;
+import org.zeroturnaround.javarebel.integration.minecraft.util.ProxyUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -30,7 +30,7 @@ public class BlockCPB extends JavassistClassBytecodeProcessor {
         if ("getBlock".equals(m.getMethodName())) {
           m.replace(
                "$_ = $proceed($$);" +
-               "$_ = (Block) " + BlockUtil.class.getName() + ".getRealObjectFor($_);"
+               "$_ = (Block) " + ProxyUtil.class.getName() + ".getRealObjectFor($_);"
           );
         }
       }
@@ -38,7 +38,7 @@ public class BlockCPB extends JavassistClassBytecodeProcessor {
 
     CtMethod createBlockState = ctClass.getDeclaredMethod("createBlockState");
     createBlockState.insertBefore("" +
-        "Block block = (Block) " + BlockUtil.class.getName() + ".getOriginalBlock(this);" +
+        "Block block = (Block) " + ProxyUtil.class.getName() + ".getOriginalObj(this);" +
         "if (block != null) {" +
         "  return block.blockState;" +
         "}");

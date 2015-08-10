@@ -3,7 +3,7 @@ package org.zeroturnaround.javarebel.integration.minecraft.cpb;
 import org.zeroturnaround.bundled.javassist.ClassPool;
 import org.zeroturnaround.bundled.javassist.CtClass;
 import org.zeroturnaround.bundled.javassist.CtConstructor;
-import org.zeroturnaround.javarebel.integration.minecraft.util.BlockUtil;
+import org.zeroturnaround.javarebel.integration.minecraft.util.ProxyUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -18,7 +18,7 @@ public class ItemBlockCPB extends JavassistClassBytecodeProcessor {
 
     CtConstructor constructor = ctClass.getDeclaredConstructor(new CtClass[]{cp.get("net.minecraft.block.Block")});
     constructor.insertBefore("" +
-        "$1 = (Block) " + BlockUtil.class.getName() + ".getOrCreateProxyBlock($1);" +
+        "$1 = (Block) " + ProxyUtil.class.getName() + ".getOrCreateProxyForObj($1);" +
         "");
   }
 }
