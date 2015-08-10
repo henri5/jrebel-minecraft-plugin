@@ -24,7 +24,5 @@ public class BlockStateCPB extends JavassistClassBytecodeProcessor {
     constructor.insertBefore("" +
         "blockIn = (Block) " + BlockUtil.class.getName() + ".getOrCreateProxyBlock($1);" +
         "");
-
-
   }
 }
