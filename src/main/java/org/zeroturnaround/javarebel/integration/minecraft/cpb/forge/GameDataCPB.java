@@ -18,7 +18,9 @@ public class GameDataCPB extends JavassistClassBytecodeProcessor {
     cp.importPackage("org.zeroturnaround.javarebel.integration.minecraft.util");
 
     CtMethod registerBlock = ctClass.getDeclaredMethod("registerBlock", new CtClass[]{cp.get("net.minecraft.block.Block"), cp.get("java.lang.String"), CtPrimitiveType.intType});
-    registerBlock.insertBefore("block = (Block) " + BlockUtil.class.getName() + ".getOrCreateProxyBlock(block);");
+    registerBlock.insertBefore("" +
+        "block = (Block) " + BlockUtil.class.getName() + ".getOrCreateProxyBlock(block);" +
+        "");
 
     registerBlock.instrument(new ExprEditor() {
       public void edit (FieldAccess arg) throws CannotCompileException {

@@ -6,10 +6,10 @@ import org.zeroturnaround.javarebel.integration.minecraft.cpb.forge.GameDataCPB;
 import org.zeroturnaround.javarebel.integration.minecraft.cpb.forge.ModelLoaderCPB;
 
 public class MinecraftPlugin implements Plugin {
-  private static final boolean PROXY_STUFF = ConfigurationFactory.getInstance().getBoolean("rebel.minecraft.proxy");
   private static final boolean DISABLE_SAVE = ConfigurationFactory.getInstance().getBoolean("rebel.minecraft.disable_save");
-  public void preinit() {
+  private static final boolean PROXY_STUFF = ConfigurationFactory.getInstance().getBoolean("rebel.minecraft.proxy");
 
+  public void preinit() {
     Integration i = IntegrationFactory.getInstance();
     ClassLoader cl = MinecraftPlugin.class.getClassLoader();
     i.addIntegrationProcessor(cl, "net.minecraft.launchwrapper.LaunchClassLoader",
@@ -41,7 +41,6 @@ public class MinecraftPlugin implements Plugin {
       i.addIntegrationProcessor(cl,"net.minecraft.world.WorldServer",
           new WorldServerCPB());
     }
-
   }
 
   public boolean checkDependencies(ClassLoader classLoader, ClassResourceSource classResourceSource) {
