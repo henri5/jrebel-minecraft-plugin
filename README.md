@@ -12,7 +12,7 @@ Tested with Minecraft 1.8 & Forge 11.14.3.1450
 
 To use the plugin
 
-1. get [JRebel](https://zeroturnaround.com/software/jrebel/)
+1. get [JRebel](https://zeroturnaround.com/software/jrebel/) - as long you're using it for non-commercial purposes, you can use free [myJRebel](https://my.jrebel.com/) license
 2. build the plugin as `mvn clean package`
 3. add JRebel and plugin to JVM arguments as `-javaagent:/path/to/jrebel.jar -Drebel.plugins=/path/to/jr-minecraft-plugin-6.2.2.jar`
 
