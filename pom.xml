@@ -28,7 +28,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>jr-javassist</artifactId>
-            <version>3.14.0-GA</version>
+            <version>3.19.0-GA-java4-zt</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

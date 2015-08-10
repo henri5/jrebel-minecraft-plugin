@@ -9,7 +9,7 @@ public class BlockClassEventListener implements ClassEventListener {
   public BlockClassEventListener() {}
 
   public void onClassEvent(int eventType, Class<?> klass) {
-    if (BlockUtil.isReroutedBlockClass(klass)) {
+    if (BlockUtil.isProxyBlockClass(klass)) {
       if (eventType == EVENT_RELOADED) {
         Constructor[] ctors = klass.getConstructors();
         Constructor ctor = null;
@@ -22,7 +22,7 @@ public class BlockClassEventListener implements ClassEventListener {
 
         try {
           ctor.setAccessible(true);
-          BlockUtil.rerouteBlock(ctor.newInstance());
+          BlockUtil.updateProxyBlock(ctor.newInstance());
         } catch (Exception e) {
           //guess we don't have anything to do
         }
