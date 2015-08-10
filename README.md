@@ -10,7 +10,7 @@ Tested with Minecraft 1.8 & Forge 11.14.3.1450
 * disable Minecraft from automatically saving with `-Drebel.minecraft.disable_save=true` JVM argument
 
 
-To use the plugin
+###To use the plugin
 
 1. get [JRebel](https://zeroturnaround.com/software/jrebel/) - as long you're using it for non-commercial purposes, you can use free [myJRebel](https://my.jrebel.com/) license
 2. build the plugin as `mvn clean package` using [Maven](https://maven.apache.org/) or grab built artifact from [here](https://github.com/henri5/jr-minecraft-plugin/raw/master/lib/jr-minecraft-plugin-6.2.2.jar)
