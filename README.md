@@ -10,25 +10,25 @@ Tested with Minecraft 1.8 & Forge 11.14.3.1450
 * disable Minecraft from automatically saving with `-Drebel.minecraft.disable_save=true` JVM argument
 
 
-###To use the plugin
+###How to use plugin:
 
 1. get [JRebel](https://zeroturnaround.com/software/jrebel/) - as long you're using it for non-commercial purposes, you can use free [myJRebel](https://my.jrebel.com/) license
 2. build the plugin as `mvn clean package` using [Maven](https://maven.apache.org/) or grab built artifact from [here](https://github.com/henri5/jr-minecraft-plugin/raw/master/lib/jr-minecraft-plugin-6.2.2.jar)
 3. add JRebel and plugin to JVM arguments as `-javaagent:/path/to/jrebel.jar -Drebel.plugins=/path/to/jr-minecraft-plugin-6.2.2.jar`
 
-If using Forge, place the arguments inside `build.gradle` `runClient` conf as
+If using gradle, place the arguments inside `build.gradle`'s `runClient` conf as
 ```
 runClient {
     jvmArgs '-javaagent:/path/to/jrebel.jar', '-Drebel.plugins=/path/to/jr-minecraft-plugin-6.2.2.jar'
 }
 ```
 ####NB!
-When setting up `rebel.xml`, make sure that first element of classpath points to directory that contains the `assets` folder, where you update the textures.
-Start up Minecraft, get into a world, change texture or json and save it - it automatically detects that a resource was changed and will invoke reload for the resourcepackage (takes couple of seconds)
+When setting up `rebel.xml`, make sure that first element of classpath points to directory that contains the `assets` folder, where you update the textures (should you want to do that).
+With that, just start up Minecraft, get into a world, change texture or json and save it - it automatically detects that a resource was changed and will invoke reload for the resourcepackage (takes couple of seconds). Customising `rebel.xml` is not required if you're only changing classes, as long as your IDE created a correct one to begin with.
 
 #####Tips & Tweaks
 
-* `-Drebel.minecraft.skip_reload_handlers` - accepts comma-separated names of classes (e.g. `com.Foo,com.Bar`). When resource reloading occurs, handlers of these classes are not notified to speed up the reload process. Can cut the reload time nearly in half by skipping `SoundHandler` as `-Drebel.minecraft.skip_reload_handlers=net.minecraft.client.audio.SoundHandler`. Add it to jvmArgs.
+* `-Drebel.minecraft.skip_reload_handlers` - accepts comma-separated names of classes (e.g. `com.Foo,com.Bar`). When resource reloading occurs, handlers of these classes are not notified to speed up the reload process. Can cut the reload time nearly in half by skipping `SoundHandler` as `-Drebel.minecraft.skip_reload_handlers=net.minecraft.client.audio.SoundHandler`. Add it to `build.gradle`'s `jvmArgs`.
 * Press P while holding down F3 to disable game entering pause menu whenever it loses focus.
 
 ![](https://raw.githubusercontent.com/henri5/jr-minecraft-plugin/master/plugin_in_action.gif)
