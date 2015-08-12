@@ -1,4 +1,4 @@
-#JRebel Minecraft Plugin
+#JRebel Minecraft Forge Plugin
 
 Tested with Minecraft 1.8 & Forge 11.14.3.1450
 
