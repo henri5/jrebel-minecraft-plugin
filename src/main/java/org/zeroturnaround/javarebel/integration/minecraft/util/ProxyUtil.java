@@ -1,12 +1,13 @@
 package org.zeroturnaround.javarebel.integration.minecraft.util;
 
 import org.zeroturnaround.bundled.javassist.util.proxy.MethodFilter;
-import org.zeroturnaround.bundled.javassist.util.proxy.MethodHandler;
+import org.zeroturnaround.bundled.javassist.util.proxy.Proxy;
 import org.zeroturnaround.bundled.javassist.util.proxy.ProxyFactory;
 import org.zeroturnaround.bundled.javassist.util.proxy.ProxyObject;
+import org.zeroturnaround.javarebel.Logger;
 import org.zeroturnaround.javarebel.LoggerFactory;
 
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class ProxyUtil {
   }
 
   public static boolean isProxiedClass(Class klass) {
-    return proxyInstanceMap.get(klass) != null;
+    return getProxyObject(klass) != null;
   }
 
   @SuppressWarnings("unused")
@@ -33,42 +34,76 @@ public class ProxyUtil {
   }
 
   private static ProxyMethodHandler getMethodHandlerForClass(Class klass) {
-    return (ProxyMethodHandler) proxyInstanceMap.get(klass).getHandler();
+    return (ProxyMethodHandler) getProxyObject(klass).getHandler();
+  }
+
+  private static ProxyObject getProxyObject(Class klass) {
+    return proxyInstanceMap.get(klass);
   }
 
   @SuppressWarnings("unused")
   public static Object getOrCreateProxyForObj(Object obj) {
-    if (obj.getClass().getCanonicalName().contains("net.minecraft")) {
+    if (isNonhandledObject(obj)) {
       return obj;
     }
 
-    if (obj instanceof ProxyObject) {
-      return obj;
-    }
-
-    Object proxy =  proxyInstanceMap.get(obj.getClass());
+    Object proxy = getProxyObject(obj.getClass());
     if (proxy != null) {
       return proxy;
     }
 
+    Logger log = LoggerFactory.getLogger("Minecraft");
+    log.info("creating proxy for {}", obj);
+
     try {
+      Constructor ctor = getProxyClassConstructor(obj);
+      if (ctor == null) {
+        //no-param ctor was not found, we cannot create any proxies for it
+        //as we don't know the necessary arguments
+        return obj;
+      }
+      Object result = ctor.newInstance(new Object[0]);
+
       ProxyMethodHandler handler = new ProxyMethodHandler(obj);
-      ProxyFactory factory = new ProxyFactory();
-      factory.setSuperclass(obj.getClass());
-      factory.setFilter(new MethodFilter() {
-        @Override
-        public boolean isHandled(Method method) {
-          return !"toString".equals(method.getName());
-        }
-      });
-      Object result = factory.create(new Class<?>[0], new Object[0], handler);
+      ((Proxy) result).setHandler(handler);
+
       proxyInstanceMap.put(obj.getClass(), (ProxyObject) result);
+      log.info("created proxy for {}: {}", new Object[]{obj, result});
       return result;
     } catch (Exception e) {
-      e.printStackTrace();
+      log.error("Problem creating proxy for " + obj, e);
       //aww dangit
     }
     return obj;
+  }
+
+  private static boolean isNonhandledObject(Object obj) {
+    if (obj.getClass().getCanonicalName().contains("net.minecraft")) {
+      //we can't really change the code for default objects anyway
+      //hence no point to proxy those
+      return true;
+    }
+    if (obj instanceof ProxyObject) {
+      return true;
+    }
+    return false;
+  }
+
+  private static Constructor getProxyClassConstructor(Object obj) {
+    Class proxyClass = createProxyClass(obj);
+    return GenericUtil.getNoParamCtorOrNull(proxyClass);
+  }
+
+  private static Class createProxyClass(Object obj) {
+    ProxyFactory factory = new ProxyFactory();
+    factory.setSuperclass(obj.getClass());
+    factory.setFilter(new MethodFilter() {
+      @Override
+      public boolean isHandled(Method method) {
+        return !"toString".equals(method.getName());
+      }
+    });
+    return factory.createClass();
   }
 
   @SuppressWarnings("unused")
@@ -77,39 +112,5 @@ public class ProxyUtil {
       return obj;
     }
     return ((ProxyMethodHandler) ((ProxyObject) obj).getHandler()).getInstance();
-  }
-
-  private static class ProxyMethodHandler implements MethodHandler {
-    private Object activeInstance;
-    private final Object originalInstance;
-
-    private ProxyMethodHandler(Object instance) {
-      this.activeInstance = instance;
-      this.originalInstance = instance;
-    }
-
-    private void setInstance(Object instance) {
-      if (instance instanceof ProxyObject) {
-        throw new RuntimeException();
-      }
-      this.activeInstance = instance;
-    }
-
-    private Object getOriginalInstance() {
-      return originalInstance;
-    }
-
-    public Object getInstance() {
-      return activeInstance;
-    }
-
-    public Object invoke(Object o, Method method, Method proceed, Object[] args) throws Throwable {
-      try {
-        return method.invoke(activeInstance, args);
-      } catch (InvocationTargetException e) {
-        LoggerFactory.getLogger("Minecraft").error("problem invoking proxy mehod: active: {}, object: {}, method: {}, proceed: {}", new Object[]{activeInstance, o, method, proceed});
-        throw new RuntimeException(e);
-      }
-    }
   }
 }
