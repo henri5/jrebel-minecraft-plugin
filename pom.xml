@@ -9,9 +9,9 @@
         
     <name>JRebel Minecraft Plugin</name>
 
-	<properties>
-		<jrebel.version>6.2.2</jrebel.version>
-	</properties>
+    <properties>
+        <jrebel.version>6.2.2</jrebel.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
