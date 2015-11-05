@@ -5,13 +5,11 @@ import java.lang.reflect.Constructor;
 
 public class GenericUtil {
   public static Constructor getNoParamCtorOrNull(Class klass) {
-    Constructor ctor = null;
-    for (Constructor c : klass.getConstructors()) {
-      if (c.getGenericParameterTypes().length == 0) {
-        ctor = c;
-        break;
+    for (Constructor ctor : klass.getConstructors()) {
+      if (ctor.getGenericParameterTypes().length == 0) {
+        return ctor;
       }
     }
-    return ctor;
+    return null;
   }
 }
