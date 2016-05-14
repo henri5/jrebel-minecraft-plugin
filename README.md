@@ -13,13 +13,13 @@ Tested with Minecraft 1.8 & Forge 11.14.3.1450
 ###How to use plugin:
 
 1. get [JRebel](https://zeroturnaround.com/software/jrebel/) - as long you're using it for non-commercial purposes, you can use free [myJRebel](https://my.jrebel.com/) license
-2. build the plugin as `mvn clean package` using [Maven](https://maven.apache.org/) or grab built artifact from [here](https://github.com/henri5/jr-minecraft-plugin/raw/master/lib/jr-minecraft-plugin-6.2.2.jar)
-3. add JRebel and plugin to JVM arguments as `-javaagent:/path/to/jrebel.jar -Drebel.plugins=/path/to/jr-minecraft-plugin-6.2.2.jar`
+2. build the plugin as `mvn clean package` using [Maven](https://maven.apache.org/) or grab built artifact from [here](https://github.com/henri5/jr-minecraft-plugin/raw/master/lib/jr-minecraft-plugin.jar)
+3. add JRebel and plugin to JVM arguments as `-javaagent:/path/to/jrebel.jar -Drebel.plugins=/path/to/jr-minecraft-plugin.jar`
 
 If using gradle, place the arguments inside `build.gradle`'s `runClient` conf as
 ```
 runClient {
-    jvmArgs '-javaagent:/path/to/jrebel.jar', '-Drebel.plugins=/path/to/jr-minecraft-plugin-6.2.2.jar'
+    jvmArgs '-javaagent:/path/to/jrebel.jar', '-Drebel.plugins=/path/to/jr-minecraft-plugin.jar'
 }
 ```
 ####NB!
