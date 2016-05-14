@@ -1,4 +1,4 @@
-package org.zeroturnaround.javarebel.integration.minecraft.util;
+package henri5.minecraft.util;
 
 import org.zeroturnaround.bundled.javassist.util.proxy.MethodHandler;
 import org.zeroturnaround.bundled.javassist.util.proxy.ProxyObject;

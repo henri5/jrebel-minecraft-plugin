@@ -1,10 +1,10 @@
-package org.zeroturnaround.javarebel.integration.minecraft.cpb;
+package henri5.minecraft.cpb;
 
 import org.zeroturnaround.bundled.javassist.ClassPool;
 import org.zeroturnaround.bundled.javassist.CtClass;
 import org.zeroturnaround.bundled.javassist.CtField;
 import org.zeroturnaround.bundled.javassist.CtMethod;
-import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrMinecraft;
+import henri5.minecraft.interfaces.JrMinecraft;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*

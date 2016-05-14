@@ -1,8 +1,8 @@
-package org.zeroturnaround.javarebel.integration.minecraft.cpb;
+package henri5.minecraft.cpb;
 
+import henri5.minecraft.interfaces.JrMinecraft;
 import org.zeroturnaround.bundled.javassist.*;
-import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrMinecraft;
-import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrSimpleReloadableResourceManager;
+import henri5.minecraft.interfaces.JrSimpleReloadableResourceManager;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -17,7 +17,7 @@ public class MinecraftCPB extends JavassistClassBytecodeProcessor {
     cp.importPackage("net.minecraft.client");
     cp.importPackage("net.minecraft.client.resources");
     cp.importPackage("org.zeroturnaround.javarebel");
-    cp.importPackage("org.zeroturnaround.javarebel.integration.minecraft.interfaces");
+    cp.importPackage("henri5.minecraft.interfaces");
     cp.importPackage("org.zeroturnaround.javarebel.integration.monitor");
     cp.importPackage("org.zeroturnaround.javarebel.integration.util");
 

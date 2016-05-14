@@ -1,9 +1,9 @@
-package org.zeroturnaround.javarebel.integration.minecraft.cpb;
+package henri5.minecraft.cpb;
 
 import org.zeroturnaround.bundled.javassist.ClassPool;
 import org.zeroturnaround.bundled.javassist.CtClass;
 import org.zeroturnaround.bundled.javassist.CtConstructor;
-import org.zeroturnaround.javarebel.integration.minecraft.util.ProxyUtil;
+import henri5.minecraft.util.ProxyUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -12,7 +12,7 @@ import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodePr
 public class BlockStateCPB extends JavassistClassBytecodeProcessor {
   @Override
   public void process(ClassPool cp, ClassLoader cl, CtClass ctClass) throws Exception {
-    cp.importPackage("org.zeroturnaround.javarebel.integration.minecraft.util");
+    cp.importPackage("henri5.minecraft.util");
     cp.importPackage("net.minecraft.block");
 
     CtConstructor constructor = ctClass.getDeclaredConstructor(

@@ -1,10 +1,10 @@
-package org.zeroturnaround.javarebel.integration.minecraft.cpb;
+package henri5.minecraft.cpb;
 
 import org.zeroturnaround.bundled.javassist.*;
 import org.zeroturnaround.bundled.javassist.expr.ExprEditor;
 import org.zeroturnaround.bundled.javassist.expr.MethodCall;
-import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrSimpleReloadableResourceManager;
-import org.zeroturnaround.javarebel.integration.minecraft.util.ReloadUtil;
+import henri5.minecraft.interfaces.JrSimpleReloadableResourceManager;
+import henri5.minecraft.util.ReloadUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -14,7 +14,7 @@ public class SimpleReloadableResourceManagerCBP extends JavassistClassBytecodePr
   @Override
   public void process(ClassPool cp, ClassLoader cl, CtClass ctClass) throws Exception {
     cp.importPackage("org.zeroturnaround.javarebel");
-    cp.importPackage("org.zeroturnaround.javarebel.integration.minecraft.util");
+    cp.importPackage("henri5.minecraft.util");
 
     ctClass.addField(CtField.make("private static Logger _jrLog = LoggerFactory.getLogger(\"Minecraft\");", ctClass));
 

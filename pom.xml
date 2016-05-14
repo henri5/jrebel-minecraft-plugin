@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>jr-minecraft-plugin</artifactId>
-    <groupId>org.zeroturnaround</groupId>
-    <version>6.2.2</version>
+    <groupId>henri5</groupId>
+    <version>0.1.0</version>
     
     <packaging>jar</packaging>
         
@@ -14,19 +14,19 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.zeroturnaround</groupId>
             <artifactId>jr-sdk</artifactId>
             <version>${jrebel.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.zeroturnaround</groupId>
             <artifactId>jr-utils</artifactId>
             <version>${jrebel.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.zeroturnaround</groupId>
             <artifactId>jr-javassist</artifactId>
             <version>3.19.0-GA-java4-zt</version>
             <scope>provided</scope>
@@ -60,6 +60,7 @@
     
     
     <build>
+        <finalName>jr-minecraft-plugin</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -75,7 +76,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <JavaRebel-Plugin>org.zeroturnaround.javarebel.integration.minecraft.MinecraftPlugin</JavaRebel-Plugin>
+                            <JavaRebel-Plugin>henri5.minecraft.MinecraftPlugin</JavaRebel-Plugin>
                         </manifestEntries> 
                     </archive>
                 </configuration>

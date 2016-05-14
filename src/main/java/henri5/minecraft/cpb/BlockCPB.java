@@ -1,10 +1,10 @@
-package org.zeroturnaround.javarebel.integration.minecraft.cpb;
+package henri5.minecraft.cpb;
 
+import henri5.minecraft.interfaces.JrBlock;
+import henri5.minecraft.util.ProxyUtil;
 import org.zeroturnaround.bundled.javassist.*;
 import org.zeroturnaround.bundled.javassist.expr.ExprEditor;
 import org.zeroturnaround.bundled.javassist.expr.MethodCall;
-import org.zeroturnaround.javarebel.integration.minecraft.interfaces.JrBlock;
-import org.zeroturnaround.javarebel.integration.minecraft.util.ProxyUtil;
 import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodeProcessor;
 
 /*
@@ -15,7 +15,7 @@ public class BlockCPB extends JavassistClassBytecodeProcessor {
   @Override
   public void process(ClassPool cp, ClassLoader cl, CtClass ctClass) throws Exception {
     cp.importPackage("net.minecraft.block");
-    cp.importPackage("org.zeroturnaround.javarebel.integration.minecraft.util");
+    cp.importPackage("henri5.minecraft.util");
 
     ctClass.addInterface(cp.get(JrBlock.class.getName()));
 

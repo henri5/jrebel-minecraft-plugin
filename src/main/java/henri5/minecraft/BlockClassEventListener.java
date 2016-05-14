@@ -1,7 +1,7 @@
-package org.zeroturnaround.javarebel.integration.minecraft;
+package henri5.minecraft;
 
+import henri5.minecraft.util.ProxyUtil;
 import org.zeroturnaround.javarebel.ClassEventListener;
-import org.zeroturnaround.javarebel.integration.minecraft.util.ProxyUtil;
 
 import java.lang.reflect.Constructor;
 

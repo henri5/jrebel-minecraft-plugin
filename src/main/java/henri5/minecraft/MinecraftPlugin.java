@@ -1,9 +1,9 @@
-package org.zeroturnaround.javarebel.integration.minecraft;
+package henri5.minecraft;
 
+import henri5.minecraft.cpb.*;
+import henri5.minecraft.cpb.forge.GameDataCPB;
+import henri5.minecraft.cpb.forge.ModelLoaderCPB;
 import org.zeroturnaround.javarebel.*;
-import org.zeroturnaround.javarebel.integration.minecraft.cpb.*;
-import org.zeroturnaround.javarebel.integration.minecraft.cpb.forge.GameDataCPB;
-import org.zeroturnaround.javarebel.integration.minecraft.cpb.forge.ModelLoaderCPB;
 
 public class MinecraftPlugin implements Plugin {
   private static final boolean DISABLE_SAVE = ConfigurationFactory.getInstance().getBoolean("rebel.minecraft.disable_save");

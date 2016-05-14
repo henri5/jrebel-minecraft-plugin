@@ -1,4 +1,4 @@
-package org.zeroturnaround.javarebel.integration.minecraft.interfaces;
+package henri5.minecraft.interfaces;
 
 import org.zeroturnaround.javarebel.integration.monitor.MonitoredResource;
 

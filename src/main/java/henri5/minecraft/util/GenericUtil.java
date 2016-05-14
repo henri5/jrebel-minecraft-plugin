@@ -1,4 +1,4 @@
-package org.zeroturnaround.javarebel.integration.minecraft.util;
+package henri5.minecraft.util;
 
 
 import java.lang.reflect.Constructor;

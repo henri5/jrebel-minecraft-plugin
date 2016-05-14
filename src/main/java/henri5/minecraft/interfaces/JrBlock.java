@@ -1,4 +1,4 @@
-package org.zeroturnaround.javarebel.integration.minecraft.interfaces;
+package henri5.minecraft.interfaces;
 
 public interface JrBlock {
   @SuppressWarnings("unused")
